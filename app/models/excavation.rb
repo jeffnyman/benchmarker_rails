@@ -15,4 +15,12 @@ class Excavation
 
     activities.all?(&:complete?)
   end
+
+  def total_cost
+    activities.sum(&:cost)
+  end
+
+  def remaining_cost
+    activities.reject(&:complete?).sum(&:cost)
+  end
 end

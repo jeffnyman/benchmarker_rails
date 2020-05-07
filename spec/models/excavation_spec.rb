@@ -34,4 +34,29 @@ RSpec.describe Excavation do
       expect(dig).to be_finished
     end
   end
+
+  # At this point, we have to calculate how much of a project is remaining.
+  # This will be via a count of the activities in the project that have yet
+  # to marked as completed. It will also be necessary to figure out the rate
+  # that activities are being completed. Those two values can then be used
+  # to determine a possible end date.
+
+  describe "costs" do
+    let(:dig) { Excavation.new }
+    let(:complete) { Activity.new(cost: 10, completed: true) }
+    let(:small_incomplete) { Activity.new(cost: 2) }
+    let(:large_incomplete) { Activity.new(cost: 25) }
+
+    before(:example) do
+      dig.activities = [complete, small_incomplete, large_incomplete]
+    end
+
+    it "an excavation will have a total cost" do
+      expect(dig.total_cost).to eq(37)
+    end
+
+    it "an excavation will have a remaining cost" do
+      expect(dig.remaining_cost).to eq(27)
+    end
+  end
 end

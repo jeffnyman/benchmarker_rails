@@ -1,6 +1,9 @@
 class Activity
-  def initialize
-    @completed = false
+  attr_accessor :cost, :completed
+
+  def initialize(options = {})
+    @completed = options[:completed]
+    @cost = options[:cost]
   end
 
   def mark_as_completed
@@ -8,6 +11,6 @@ class Activity
   end
 
   def complete?
-    @completed
+    completed
   end
 end
