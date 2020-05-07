@@ -1,0 +1,28 @@
+require "rails_helper"
+
+RSpec.describe Excavation do
+  describe "state" do
+    it "an excavation with no activities is finished" do
+      dig = Excavation.new
+
+      expect(dig.finished?).to be_truthy
+    end
+
+    # I could write a test for "an excavation wiht a complete activity is
+    # finished" but while that would have me add code, it would actually
+    # not provide a test that fails *given the current code*. So instead
+    # I do the following one. Notice that even here nothing actually says
+    # that the activity is complete or incomplete. Yet that is my intent.
+    # So the assumption being made here is that a new activity is one that
+    # is incomplete.
+
+    it "an excavation with an incomplete activity is unfinished" do
+      dig = Excavation.new
+      activity = Activity.new
+
+      dig.activities << activity
+
+      expect(dig.finished?).to be_falsy
+    end
+  end
+end
