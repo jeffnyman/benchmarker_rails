@@ -13,8 +13,6 @@ class Excavation
 
     # activities.empty?
 
-    activities.all? do |item|
-      item.complete?
-    end
+    activities.all?(&:complete?)
   end
 end
