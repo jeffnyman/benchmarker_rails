@@ -22,5 +22,16 @@ RSpec.describe Excavation do
 
       expect(dig).not_to be_finished
     end
+
+    # Because of the tests that were added to the activity_spec, now the
+    # distinction between complete/incomplete can be applied in the context
+    # of the excavation as a whole.
+
+    it "an excavation is finished if all activities are marked as completed" do
+      dig.activities << activity
+      activity.mark_as_completed
+
+      expect(dig).to be_finished
+    end
   end
 end
