@@ -2,10 +2,11 @@ require "rails_helper"
 
 RSpec.describe Excavation do
   describe "state" do
-    it "an excavation with no activities is finished" do
-      dig = Excavation.new
+    let(:dig) { Excavation.new }
+    let(:activity) { Activity.new }
 
-      expect(dig.finished?).to be_truthy
+    it "an excavation with no activities is finished" do
+      expect(dig).to be_finished
     end
 
     # I could write a test for "an excavation wiht a complete activity is
@@ -17,12 +18,9 @@ RSpec.describe Excavation do
     # is incomplete.
 
     it "an excavation with an incomplete activity is unfinished" do
-      dig = Excavation.new
-      activity = Activity.new
-
       dig.activities << activity
 
-      expect(dig.finished?).to be_falsy
+      expect(dig).not_to be_finished
     end
   end
 end
