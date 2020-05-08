@@ -33,4 +33,12 @@ class Excavation
   def incomplete_activities
     activities.reject(&:complete?)
   end
+
+  def completed_pace
+    activities.sum(&:counts_towards_pace)
+  end
+
+  def current_pace
+    completed_pace * 1.0 / 14
+  end
 end

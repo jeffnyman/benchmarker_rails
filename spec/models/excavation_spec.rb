@@ -59,4 +59,30 @@ RSpec.describe Excavation do
       expect(dig.remaining_cost).to eq(27)
     end
   end
+
+  # At this point, the excavation has to be given activities that are in and
+  # out of the work interval window.
+
+  describe "pace" do
+    let(:dig) { Excavation.new }
+    let(:completed_recently) { Activity.new(cost: 2, completed: 1.day.ago) }
+    let(:completed_awhile_ago) { Activity.new(cost: 1, completed: 1.month.ago) }
+    let(:small_incomplete) { Activity.new(cost: 2) }
+    let(:large_incomplete) { Activity.new(cost: 4) }
+
+    before(:example) do
+      dig.activities = [
+        completed_recently, completed_awhile_ago,
+        small_incomplete, large_incomplete
+      ]
+    end
+
+    it "excavation pace is calculated from completed activities" do
+      expect(dig.completed_pace).to eq(2)
+    end
+
+    it "excavation pace is derived from rate of completed activities" do
+      expect(dig.current_pace).to eq(1.0 / 7)
+    end
+  end
 end
