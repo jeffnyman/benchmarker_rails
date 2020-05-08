@@ -10,6 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_05_08_141553) do
 
+  create_table "activities", force: :cascade do |t|
+    t.integer "excavation_id", null: false
+    t.string "name"
+    t.integer "cost"
+    t.datetime "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["excavation_id"], name: "index_activities_on_excavation_id"
+  end
+
+  create_table "excavations", force: :cascade do |t|
+    t.string "name"
+    t.date "ideal_finish_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "activities", "excavations"
 end

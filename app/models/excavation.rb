@@ -1,9 +1,5 @@
-class Excavation
-  attr_accessor :activities, :ideal_finish_date
-
-  def initialize
-    @activities = []
-  end
+class Excavation < ApplicationRecord
+  has_many :activities, dependent: :destroy
 
   def self.work_interval_in_days
     14

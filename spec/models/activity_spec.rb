@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe Activity do
+RSpec.describe Activity, type: :model do
   describe "state" do
     let(:activity) { Activity.new }
 

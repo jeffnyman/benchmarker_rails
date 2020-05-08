@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe Excavation do
+RSpec.describe Excavation, type: :model do
   describe "state" do
     let(:dig) { Excavation.new }
     let(:activity) { Activity.new }
@@ -53,7 +53,7 @@ RSpec.describe Excavation do
 
   describe "costs" do
     let(:dig) { Excavation.new }
-    let(:complete) { Activity.new(cost: 10, completed: true) }
+    let(:complete) { Activity.new(cost: 10, completed: 2.days.ago) }
     let(:small_incomplete) { Activity.new(cost: 2) }
     let(:large_incomplete) { Activity.new(cost: 25) }
 
