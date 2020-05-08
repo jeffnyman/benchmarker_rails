@@ -35,5 +35,10 @@ RSpec.describe Activity do
       expect(activity).not_to be_part_of_pace
       expect(activity.counts_towards_pace).to eq(0)
     end
+
+    it "recently completed activities count toward the pace" do
+      activity.mark_as_completed(1.day.ago)
+      expect(activity).to be_part_of_pace
+    end
   end
 end
