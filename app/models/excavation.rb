@@ -1,5 +1,5 @@
 class Excavation
-  attr_accessor :activities
+  attr_accessor :activities, :ideal_finish_date
 
   def initialize
     @activities = []
@@ -44,5 +44,8 @@ class Excavation
 
   def projected_days_remaining
     remaining_cost / current_pace
+  end
+
+  def on_time?
   end
 end

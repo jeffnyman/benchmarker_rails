@@ -88,5 +88,10 @@ RSpec.describe Excavation do
     it "projected days remaining is calculated from pace and cost" do
       expect(dig.projected_days_remaining).to eq(75.6)
     end
+
+    it "excavations can determine if they are not on schedule" do
+      dig.ideal_finish_date = 2.weeks.from_now
+      expect(dig).not_to be_on_time
+    end
   end
 end
