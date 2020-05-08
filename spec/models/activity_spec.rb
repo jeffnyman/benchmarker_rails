@@ -47,5 +47,19 @@ RSpec.describe Activity do
       expect(activity).not_to be_part_of_pace
       expect(activity.counts_towards_pace).to eq(0)
     end
+
+    # A danger here is that these tests hardcode the value of the work interval.
+
+    it "activities completed just below the boundary of the work interval count toward the pace" do
+      activity.mark_as_completed(13.days.ago)
+      expect(activity).to be_part_of_pace
+      expect(activity.counts_towards_pace).to eq(5)
+    end
+
+    it "activities completed at the boundary of the work interval do not count toward the pace" do
+      activity.mark_as_completed(14.days.ago)
+      expect(activity).not_to be_part_of_pace
+      expect(activity.counts_towards_pace).to eq(0)
+    end
   end
 end
