@@ -21,7 +21,7 @@ class Activity
 
   def part_of_pace?
     return false unless complete?
-    completed > 14.days.ago
+    completed > Excavation.work_interval_in_days.days.ago
   end
 
   def counts_towards_pace

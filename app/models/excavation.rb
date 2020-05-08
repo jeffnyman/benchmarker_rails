@@ -5,6 +5,10 @@ class Excavation
     @activities = []
   end
 
+  def self.work_interval_in_days
+    14
+  end
+
   def finished?
     # It's no longer good enough to check if the activities are empty (as in
     # there are none) because now activities may be present (which would
@@ -39,7 +43,7 @@ class Excavation
   end
 
   def current_pace
-    completed_pace * 1.0 / 14
+    completed_pace * 1.0 / Excavation.work_interval_in_days
   end
 
   def projected_days_remaining
