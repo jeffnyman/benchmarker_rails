@@ -70,6 +70,13 @@ RSpec.describe Excavation do
     let(:small_incomplete) { Activity.new(cost: 2) }
     let(:large_incomplete) { Activity.new(cost: 25) }
 
+    # This calculation still feels like it's not being incorporated well.
+    # The idea is you take the work interval divided by the total cost of
+    # all completed activities. That is how the current pace is derived.
+    let(:pace_derivation) {
+      1.0 / (Excavation.work_interval_in_days * 1.0 / dig.completed_pace)
+    }
+
     before(:example) do
       dig.activities = [
         completed_recently, completed_awhile_ago,
@@ -82,7 +89,7 @@ RSpec.describe Excavation do
     end
 
     it "excavation pace is derived from rate of completed activities" do
-      expect(dig.current_pace).to eq(1.0 / 2.8)
+      expect(dig.current_pace).to eq(pace_derivation)
     end
 
     it "projected days remaining is calculated from pace and cost" do
