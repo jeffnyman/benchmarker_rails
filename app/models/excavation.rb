@@ -13,7 +13,13 @@ class Excavation
 
     # activities.empty?
 
-    activities.all?(&:complete?)
+    # Now instead of iterating over the activities to check if they are
+    # complete, I can make this a bit more expressive by saying what I
+    # am actually looking for.
+
+    # activities.all?(&:complete?)
+
+    incomplete_activities.empty?
   end
 
   def total_cost
@@ -21,6 +27,10 @@ class Excavation
   end
 
   def remaining_cost
-    activities.reject(&:complete?).sum(&:cost)
+    incomplete_activities.sum(&:cost)
+  end
+
+  def incomplete_activities
+    activities.reject(&:complete?)
   end
 end
