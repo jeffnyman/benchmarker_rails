@@ -46,7 +46,11 @@ class Excavation
     remaining_cost / current_pace
   end
 
+  def projected_end_date
+    Time.zone.today + projected_days_remaining
+  end
+
   def on_time?
-    (Date.today + projected_days_remaining) <= ideal_finish_date
+    projected_end_date <= ideal_finish_date
   end
 end
