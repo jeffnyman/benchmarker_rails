@@ -13,4 +13,11 @@ class Activity
   def complete?
     completed
   end
+
+  def part_of_pace?
+  end
+
+  def counts_towards_pace
+    0
+  end
 end
