@@ -1,0 +1,11 @@
+<h1>New Excavation</h1>
+
+<%= form_for(@excavation) do |f| %>
+  <%= f.label(:name) %>
+  <%= f.text_field(:name) %>
+  <br />
+  <%= f.label(:activities) %>
+  <%= text_area_tag("excavation[activities]") %>
+  <br />
+  <%= f.submit %>
+<% end %>
