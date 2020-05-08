@@ -65,10 +65,10 @@ RSpec.describe Excavation do
 
   describe "pace" do
     let(:dig) { Excavation.new }
-    let(:completed_recently) { Activity.new(cost: 2, completed: 1.day.ago) }
-    let(:completed_awhile_ago) { Activity.new(cost: 1, completed: 1.month.ago) }
+    let(:completed_recently) { Activity.new(cost: 5, completed: 1.day.ago) }
+    let(:completed_awhile_ago) { Activity.new(cost: 10, completed: 1.month.ago) }
     let(:small_incomplete) { Activity.new(cost: 2) }
-    let(:large_incomplete) { Activity.new(cost: 4) }
+    let(:large_incomplete) { Activity.new(cost: 25) }
 
     before(:example) do
       dig.activities = [
@@ -78,11 +78,11 @@ RSpec.describe Excavation do
     end
 
     it "excavation pace is calculated from completed activities" do
-      expect(dig.completed_pace).to eq(2)
+      expect(dig.completed_pace).to eq(5)
     end
 
     it "excavation pace is derived from rate of completed activities" do
-      expect(dig.current_pace).to eq(1.0 / 7)
+      expect(dig.current_pace).to eq(1.0 / 2.8)
     end
   end
 end
