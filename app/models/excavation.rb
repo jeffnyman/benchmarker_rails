@@ -47,5 +47,6 @@ class Excavation
   end
 
   def on_time?
+    (Date.today + projected_days_remaining) <= ideal_finish_date
   end
 end

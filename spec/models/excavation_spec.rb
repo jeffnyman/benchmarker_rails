@@ -93,5 +93,10 @@ RSpec.describe Excavation do
       dig.ideal_finish_date = 2.weeks.from_now
       expect(dig).not_to be_on_time
     end
+
+    it "excavations can determine if they are on schedule" do
+      dig.ideal_finish_date = 3.months.from_now
+      expect(dig).to be_on_time
+    end
   end
 end
