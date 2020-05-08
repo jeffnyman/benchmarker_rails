@@ -25,6 +25,6 @@ class Activity
   end
 
   def counts_towards_pace
-    0
+    part_of_pace? ? cost : 0
   end
 end
