@@ -41,4 +41,8 @@ class Excavation
   def current_pace
     completed_pace * 1.0 / 14
   end
+
+  def projected_days_remaining
+    remaining_cost / current_pace
+  end
 end

@@ -84,5 +84,9 @@ RSpec.describe Excavation do
     it "excavation pace is derived from rate of completed activities" do
       expect(dig.current_pace).to eq(1.0 / 2.8)
     end
+
+    it "projected days remaining is calculated from pace and cost" do
+      expect(dig.projected_days_remaining).to eq(75.6)
+    end
   end
 end
