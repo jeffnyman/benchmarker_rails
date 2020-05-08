@@ -2,11 +2,17 @@ class Activity
   attr_accessor :cost, :completed
 
   def initialize(options = {})
-    @completed = options[:completed]
+    # This had to be changed for the last tests added in "costs".
+
+    # @completed = options[:completed]
+
+    mark_as_completed(options[:completed]) if options[:completed]
     @cost = options[:cost]
   end
 
   def mark_as_completed(date = Time.current)
+    date = Time.current if date == true
+
     # It's no longer enough to just say that an activity is marked as being
     # complete. Now there will be a datetime associated with that.
 
@@ -16,7 +22,7 @@ class Activity
   end
 
   def complete?
-    completed
+    completed.present?
   end
 
   def part_of_pace?

@@ -68,6 +68,21 @@ RSpec.describe Excavation do
     it "an excavation will have a remaining cost" do
       expect(dig.remaining_cost).to eq(27)
     end
+
+    # These tests below were not originally in this section. They were first
+    # created in "pace" but then I ported them here. Which does suggest that
+    # this could all be one block. But what's interesting is that because
+    # this test has a condition ("completed: true") that was eventually
+    # designed away, the tests in "pace" would fail here. This has to do
+    # with marking activities as completed, which wasn't happening.
+
+    it "excavation pace is calculated from completed activities" do
+      expect(dig.completed_pace).to eq(10)
+    end
+
+    it "projected days remaining is calculated from pace and cost" do
+      expect(dig.projected_days_remaining).to eq(37.8)
+    end
   end
 
   # At this point, the excavation has to be given activities that are in and
