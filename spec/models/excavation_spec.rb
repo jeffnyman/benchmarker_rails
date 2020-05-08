@@ -9,23 +9,11 @@ RSpec.describe Excavation, type: :model do
       expect(dig).to be_finished
     end
 
-    # I could write a test for "an excavation wiht a complete activity is
-    # finished" but while that would have me add code, it would actually
-    # not provide a test that fails *given the current code*. So instead
-    # I do the following one. Notice that even here nothing actually says
-    # that the activity is complete or incomplete. Yet that is my intent.
-    # So the assumption being made here is that a new activity is one that
-    # is incomplete.
-
     it "an excavation with an incomplete activity is unfinished" do
       dig.activities << activity
 
       expect(dig).not_to be_finished
     end
-
-    # Because of the tests that were added to the activity_spec, now the
-    # distinction between complete/incomplete can be applied in the context
-    # of the excavation as a whole.
 
     it "an excavation is finished if all activities are marked as completed" do
       dig.activities << activity
@@ -34,9 +22,6 @@ RSpec.describe Excavation, type: :model do
       expect(dig).to be_finished
     end
 
-    # This was added late to make sure that all of the material that was
-    # added, in terms of the calculations, are appropriately handled.
-
     it "an excavation that has no completed tasks is represented correctly" do
       expect(dig.completed_pace).to eq(0)
       expect(dig.current_pace).to eq(0)
@@ -44,12 +29,6 @@ RSpec.describe Excavation, type: :model do
       expect(dig).not_to be_on_time
     end
   end
-
-  # At this point, we have to calculate how much of a project is remaining.
-  # This will be via a count of the activities in the project that have yet
-  # to marked as completed. It will also be necessary to figure out the rate
-  # that activities are being completed. Those two values can then be used
-  # to determine a possible end date.
 
   describe "costs" do
     let(:dig) { Excavation.new }
@@ -69,13 +48,6 @@ RSpec.describe Excavation, type: :model do
       expect(dig.remaining_cost).to eq(27)
     end
 
-    # These tests below were not originally in this section. They were first
-    # created in "pace" but then I ported them here. Which does suggest that
-    # this could all be one block. But what's interesting is that because
-    # this test has a condition ("completed: true") that was eventually
-    # designed away, the tests in "pace" would fail here. This has to do
-    # with marking activities as completed, which wasn't happening.
-
     it "excavation pace is calculated from completed activities" do
       expect(dig.completed_pace).to eq(10)
     end
@@ -84,9 +56,6 @@ RSpec.describe Excavation, type: :model do
       expect(dig.projected_days_remaining).to eq(37.8)
     end
   end
-
-  # At this point, the excavation has to be given activities that are in and
-  # out of the work interval window.
 
   describe "pace" do
     let(:dig) { Excavation.new }
