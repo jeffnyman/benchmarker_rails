@@ -33,6 +33,16 @@ RSpec.describe Excavation do
 
       expect(dig).to be_finished
     end
+
+    # This was added late to make sure that all of the material that was
+    # added, in terms of the calculations, are appropriately handled.
+
+    it "an excavation that has no completed tasks is represented correctly" do
+      expect(dig.completed_pace).to eq(0)
+      expect(dig.current_pace).to eq(0)
+      expect(dig.projected_days_remaining).to be_nan
+      expect(dig).not_to be_on_time
+    end
   end
 
   # At this point, we have to calculate how much of a project is remaining.

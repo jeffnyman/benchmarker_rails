@@ -55,6 +55,7 @@ class Excavation
   end
 
   def on_time?
+    return false if projected_days_remaining.nan?
     projected_end_date <= ideal_finish_date
   end
 end
