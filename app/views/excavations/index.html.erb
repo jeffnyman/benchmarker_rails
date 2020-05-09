@@ -1,0 +1,17 @@
+<h1>All Excavations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Excavation Name</td>
+      <td>Total Cost</td>
+  </thead>
+  <tbody>
+    <% @excavations.each do |excavation| %>
+    <tr>
+      <td><%= excavation.name %></td>
+      <td><%= excavation.total_cost %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
