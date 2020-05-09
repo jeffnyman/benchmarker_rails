@@ -8,9 +8,9 @@
   </thead>
   <tbody>
     <% @excavations.each do |excavation| %>
-    <tr>
-      <td><%= excavation.name %></td>
-      <td><%= excavation.total_cost %></td>
+    <tr class="excavation-row" id="<%= dom_id(excavation) %>">
+      <td class="name"><%= excavation.name %></td>
+      <td class="total-cost"><%= excavation.total_cost %></td>
     </tr>
     <% end %>
   </tbody>

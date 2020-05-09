@@ -10,7 +10,14 @@ RSpec.describe "Excavations", type: :system do
 
     visit excavations_path
 
-    expect(page).to have_content("Talpiot Tomb")
-    expect(page).to have_content(8)
+    @excavation = Excavation.find_by(name: "Talpiot Tomb")
+
+    expect(page).to have_selector(
+      "#excavation_#{@excavation.id} .name", text: "Talpiot Tomb"
+    )
+
+    expect(page).to have_selector(
+      "#excavation_#{@excavation.id} .total-cost", text: "8"
+    )
   end
 end
