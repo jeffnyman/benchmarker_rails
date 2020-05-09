@@ -4,6 +4,11 @@ class CreatesExcavation
   def initialize(name: "", activity_string: "")
     @name = name
     @activity_string = activity_string
+    @success = false
+  end
+
+  def success?
+    @success
   end
 
   def build
@@ -14,7 +19,8 @@ class CreatesExcavation
 
   def create
     build
-    excavation.save
+    result = excavation.save
+    @success = result
   end
 
   def convert_string_to_activities

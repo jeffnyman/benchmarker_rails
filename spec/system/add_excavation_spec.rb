@@ -20,4 +20,14 @@ RSpec.describe "Excavations", type: :system do
       "#excavation_#{@excavation.id} .total-cost", text: "8"
     )
   end
+
+  it "users cannot create an excavation without a name" do
+    visit new_excavation_path
+
+    fill_in "Name", with: ""
+    fill_in "Activities", with: "Expose antechamber:3\nRemove terra rossa soil:5"
+    click_on("Create Excavation")
+
+    expect(page).to have_selector(".new_excavation")
+  end
 end

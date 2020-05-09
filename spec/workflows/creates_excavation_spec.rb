@@ -14,6 +14,15 @@ RSpec.describe CreatesExcavation do
     end
   end
 
+  describe "failure cases" do
+    it "an excavation will not be created if it has no name" do
+      creator = CreatesExcavation.new(name: "", activity_string: "")
+      creator.create
+
+      expect(creator).not_to be_a_success
+    end
+  end
+
   describe "activity string parsing" do
     let(:activities) { creator.convert_string_to_activities }
 

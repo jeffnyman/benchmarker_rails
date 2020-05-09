@@ -10,7 +10,13 @@ class ExcavationsController < ApplicationController
     )
 
     @workflow.create
-    redirect_to excavations_path
+
+    if @workflow.success?
+      redirect_to excavations_path
+    else
+      @excavation = @workflow.excavation
+      render :new
+    end
   end
 
   def index

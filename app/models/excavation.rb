@@ -1,4 +1,5 @@
 class Excavation < ApplicationRecord
+  validates :name, presence: true
   has_many :activities, dependent: :destroy
 
   def self.work_interval_in_days
